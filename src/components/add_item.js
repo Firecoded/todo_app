@@ -15,7 +15,6 @@ class AddItem extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		console.log('state be like', this.state)
 		this.props.add(this.state);
 		this.setState({
 			title: '',
