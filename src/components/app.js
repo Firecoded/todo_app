@@ -19,10 +19,6 @@ class App extends Component {
 			items: []
 		};
 	}
-
-	componentDidMount() {
-		this.getListData();
-	}
 	
 	async addItem (item) {
 		try {
@@ -49,7 +45,7 @@ class App extends Component {
 		        <Route 
 		        exact 
 		        path = "/" 
-		        render = {props => <Home list ={this.state.items} add ={this.addItem.bind(this)}{...props}/>} 
+		        render = {props => <Home getList = {this.getListData.bind(this)} list ={this.state.items} add ={this.addItem.bind(this)}{...props}/>} 
 		        />
 		    </div>
 		);

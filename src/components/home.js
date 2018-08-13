@@ -4,6 +4,9 @@ import TodoList from './todo_list';
 
 class Home extends Component {
 	
+	componentDidMount() {
+		this.props.getList();
+	}
 
 	render() {
 		const {add, list} = this.props;

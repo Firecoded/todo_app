@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import TodoItem from './todo_item';
 
 
 class Todo_list extends Component {
 	render() {
 		const listElement = this.props.list.map((item, index)=>{
-			return <li className = "collection-item" key={item._id}>{item.title}</li>;
+			return <TodoItem key = {item._id} title = {item.title}/>
 		})
 		
 		return (
