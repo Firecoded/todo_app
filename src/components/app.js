@@ -1,15 +1,11 @@
 import 'materialize-css/dist/css/materialize.min.css';
 import React, {Component} from 'react';
-import Todo_list from './todo_list';
-import AddItem from "./add_item";
 import axios from 'axios';
-import {Route} from 'react-router-dom';
-import Home from './home'
-
-
-const BASE_URL = 'http://api.reactprototypes.com';
-const API_KEY = '?key=c618_fire	';
-
+import {Route, Switch} from 'react-router-dom';
+import Home from './home';
+import NotFound from './404';
+import ItemDetails from './item_details';
+import config from "../config";
 
 class App extends Component {
 	constructor(props){
@@ -21,6 +17,7 @@ class App extends Component {
 	}
 	
 	async addItem (item) {
+		const {BASE_URL, API_KEY} = config.api;
 		try {
 			if(!item.title){
 				throw new Error('Missing Title'); //throw is like return, stops when hit
@@ -33,6 +30,7 @@ class App extends Component {
 	}
 
 	async getListData() {
+		const {BASE_URL, API_KEY} = config.api;
 		const resp = await axios.get(`${BASE_URL}/todos${API_KEY}`);
 		this.setState({
 			items: resp.data.todos
@@ -42,11 +40,15 @@ class App extends Component {
 	render(){
 		return (
 		    <div className= "container">
-		        <Route 
-		        exact 
-		        path = "/" 
-		        render = {props => <Home getList = {this.getListData.bind(this)} list ={this.state.items} add ={this.addItem.bind(this)}{...props}/>} 
-		        />
+		        <Switch>
+		        	<Route 
+			        exact 
+			        path = "/" 
+			        render = {props => <Home getList = {this.getListData.bind(this)} list ={this.state.items} add ={this.addItem.bind(this)}{...props}/>} 
+			        />
+			        <Route path='/item-details/:item_id' component = {ItemDetails}/>
+			        <Route component = {NotFound}/>
+		        </Switch>
 		    </div>
 		);
 	}

@@ -1,0 +1,9 @@
+.not-found {
+	height: 100vh;
+	display: flex;
+}
+.not-found .not-found-cont {
+	margin: auto;
+	position: relative;
+	top: -20%;
+}
